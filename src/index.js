@@ -5,7 +5,7 @@ import HemisphereDisplay from './HemisphereDisplay';
 
 class App extends React.Component {
 
-    state = { latitude: null, error: " " }
+    state = { latitude: null,longitude:null, error: " " }
     componentDidMount() {
 
         window.navigator.geolocation.getCurrentPosition(
@@ -15,11 +15,11 @@ class App extends React.Component {
     }
 
     render() {
-        if (this.state.error && !this.state.latitude) {
+        if (this.state.error && !this.state.latitude && !this.state.longitude) {
             return this.state.error
         }
         else {
-            return <div><HemisphereDisplay latitude={this.state.latitude} /></div>
+            return <div><HemisphereDisplay latitude={this.state.latitude} longitude={this.state.longitude} /></div>
         }
     }
 }

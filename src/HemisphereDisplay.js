@@ -1,27 +1,41 @@
 import React from "react";
-import north from "./images/northen.png"
-import south from "./images/southern.png"
+import ne from "./images/ne.png"
+import se from "./images/se.png"
+import nw from "./images/nw.png"
+import sw from "./images/sw.png"
 
 
 const hemispherConfig = {
-    northern: {
-        text: "You are in Northen Hemisphere",
-        picture: north
+
+    NorthEastern: {
+        text: "You are in NorthEastern Hemisphere",
+        picture: ne
     },
-    southern: {
-        text: "You are in Southern Hemisphere",
-        picture: south
-    }
+    NorthWestern: {
+        text: "You are in NorthWestern Hemisphere",
+        picture: nw
+    },
+    SouthEastern: {
+        text: "You are in SouthEastern Hemisphere",
+        picture: se
+    },
+    SouthWestern: {
+        text: "You are in SouthWestern Hemisphere",
+        picture: sw
+    },
 }
 
 const HemisphereDisplay = (props) => {
-    const hemis = props.latitude > 0 ? hemispherConfig.northern : hemispherConfig.southern
+    const hemis = (props.latitude > 0 && props.longitude>0)? hemispherConfig.NorthEastern :
+    (props.latitude > 0 && props.longitude<0)? hemispherConfig.NorthWestern :
+    (props.latitude <0 && props.longitude<0)? hemispherConfig.SouthWestern :hemispherConfig.SouthEastern
     return (
         <div className="content">
             <div>Latitude is {props.latitude}<br /></div>
-            <div>You are in {hemis.text}</div>
+            <div>Latitude is {props.longitude}<br /></div>
+            <div>{hemis.text}</div>
 
-            <img src={hemis.picture}></img>
+            <img src={hemis.picture} style={{width:'800px',height:'600px'}}></img>
         </div>
     )
 }
